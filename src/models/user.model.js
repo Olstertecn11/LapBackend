@@ -34,6 +34,25 @@ User.findByCredentials = (username, password, result) => {
 };
 
 
+User.getUserByCredentials = (username, password, result) => {
+  var _query = `select * from tbl_user where usr_username = '${username}' and usr_password='${password}'`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      result(null, res[0]);
+      return;
+    }
+    result({ kind: "not_found" }, null);
+  });
+};
+
+
+
 
 
 module.exports = User;
