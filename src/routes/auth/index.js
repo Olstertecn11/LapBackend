@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
 
 
 router.post('/', User.userExist);
+router.delete('/', User.closeUserSession);
 
 
 
