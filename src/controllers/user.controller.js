@@ -28,3 +28,26 @@ exports.userExist = (req, res) => {
     }
   })
 }
+
+
+exports.closeUserSession = (req, res) => {
+  const { id } = req.query;
+  console.log(req);
+  if (!id) {
+    res.send({ msg: 'missing dependencies' })
+  }
+  Token.deleteToken(id, (err, data) => {
+    if (err) {
+      console.log('err');
+      console.log(err);
+      res.send({ msg: err })
+    }
+    else {
+      console.log('data');
+      console.log(data);
+      res.send({ msg: data })
+    }
+  });
+}
+
+
