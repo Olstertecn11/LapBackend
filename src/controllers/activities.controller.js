@@ -33,13 +33,12 @@ exports.getImagesFromActivity = (req, res) => {
 
 exports.saveActivity = (req, res) => {
   const { name, description, date } = req.body;
-
   Activity.createActivity(name, description, date, (err, data) => {
     if (err) {
-      return res.send({ msg: err })
+      return res.send({ status: false })
     }
     else {
-      return res.send({ msg: 'success' })
+      return res.send({ status: true })
     }
   });
 
