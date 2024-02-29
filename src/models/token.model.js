@@ -27,5 +27,19 @@ Token.deleteToken = (id_usr, result) => {
   })
 }
 
+Token.getTokenBySession = (idUser, token, result) => {
+  var _query = `select COUNT(*) AS rowCount from tbl_session_token where stk_id_user='${idUser}' and stk_value='${token}'`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      result(err, null);
+    }
+    else {
+      console.log('res');
+      console.log(res);
+      result(null, res[0].rowCount);
+    }
+  })
+}
+
 module.exports = Token;
 
