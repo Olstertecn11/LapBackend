@@ -32,7 +32,6 @@ exports.userExist = (req, res) => {
 
 exports.closeUserSession = (req, res) => {
   const { id } = req.query;
-  console.log(req);
   if (!id) {
     res.send({ msg: 'missing dependencies' })
   }
