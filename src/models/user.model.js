@@ -55,4 +55,5 @@ User.getUserByCredentials = (username, password, result) => {
 
 
 
+
 module.exports = User;
