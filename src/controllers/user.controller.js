@@ -51,3 +51,16 @@ exports.closeUserSession = (req, res) => {
 }
 
 
+exports.hasSession = (req, res) => {
+  const { idUser, token } = req.query;
+  Token.getTokenBySession(idUser, token, (err, data) => {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      return res.send(data == 0 ? { exist: false } : { exist: true });
+    }
+  });
+}
+
+
