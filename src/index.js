@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express();
 const port = 3000
 const cors = require('cors')
@@ -6,7 +7,8 @@ const cors = require('cors')
 
 
 // config segment
-
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 app.use(express.json());
 app.use(cors());
 app.use('/auth', require('./routes/auth/index.js'))
