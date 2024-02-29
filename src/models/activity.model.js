@@ -45,12 +45,16 @@ Activity.getAll = (result) => {
 
 }
 
-Activity.createActivity = (name, description, date) => {
+Activity.createActivity = (name, description, date, result) => {
   var _query = `insert into tbl_activities(act_name, act_description, act_date)values
   ('${name}','${description}','${date}')`;
-  sql.query(_query, (err, result) => {
-    if (err) console.log(err);
-    console.log(result);
+  sql.query(_query, (err, data) => {
+    if (err) {
+      result(err, null);
+    }
+    else {
+      result(null, data)
+    }
   });
 }
 
