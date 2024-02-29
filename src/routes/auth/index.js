@@ -4,11 +4,7 @@ const User = require('../../controllers/user.controller.js');
 
 
 
-router.get('/', (req, res) => {
-  res.send('get request')
-});
-
-
+router.get('/', User.hasSession);
 router.post('/', User.userExist);
 router.delete('/', User.closeUserSession);
 
