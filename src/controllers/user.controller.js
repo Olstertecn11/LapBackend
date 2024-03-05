@@ -19,7 +19,7 @@ exports.userExist = (req, res) => {
         const token_val = crypto.randomBytes(33).toString('hex');
         User.getUserByCredentials(username, password, (err, data) => {
           Token.createToken(token_val, data.usr_id)
-          res.send({ token_val, result, id_usr: data.usr_id });
+          res.send({ token_val, result, id_usr: data.usr_id, credentials: data.priv_id });
         });
       }
       else {
