@@ -35,7 +35,7 @@ User.findByCredentials = (username, password, result) => {
 
 
 User.getUserByCredentials = (username, password, result) => {
-  var _query = `SELECT tbl_user.usr_id, tbl_privileges.priv_id FROM tbl_user INNER JOIN tbl_privileges ON tbl_user.usr_privileges = tbl_privileges.priv_id where tbl_user.usr_username='${username}' and tbl_user.usr_password='${password}'`;
+  var _query = `SELECT tbl_user.usr_name, tbl_user.usr_id, tbl_privileges.priv_id FROM tbl_user INNER JOIN tbl_privileges ON tbl_user.usr_privileges = tbl_privileges.priv_id where tbl_user.usr_username='${username}' and tbl_user.usr_password='${password}'`;
   sql.query(_query, (err, res) => {
     if (err) {
       console.log("error: ", err);

@@ -6,13 +6,13 @@ const File = {
 
 
 
-File.saveFile = (pdfFile, result) => {
-  const insertQuery = 'INSERT INTO archivos_pdf (nombre, contenido) VALUES (?, ?)';
+File.saveFile = (pdfFile, id, result) => {
+  const insertQuery = 'INSERT INTO archivos_pdf (nombre, contenido, id_clase) VALUES (?, ?, ?)';
 
   const fs = require('fs');
   const content = fs.readFileSync(pdfFile.path);
 
-  const values = [pdfFile.originalname, content];
+  const values = [pdfFile.originalname, content, id];
 
   sql.query(insertQuery, values, (error, results, fields) => {
     if (error) {
@@ -26,7 +26,7 @@ File.saveFile = (pdfFile, result) => {
 
 
 File.getFiles = (result) => {
-  const selectQuery = 'SELECT nombre, contenido FROM archivos_pdf';
+  const selectQuery = 'SELECT * FROM archivos_pdf';
 
   sql.query(selectQuery, (error, results, fields) => {
     if (error) {
