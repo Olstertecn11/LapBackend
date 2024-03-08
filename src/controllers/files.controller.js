@@ -5,9 +5,7 @@ const File = require('../models/file.model.js');
 
 exports.upload = (req, res) => {
   const pdfFile = req.file;
-  console.log(req);
   const { id } = req.query;
-  console.log(id);
 
   if (!pdfFile) {
     return res.status(400).send('No se ha enviado ningún archivo.');
@@ -15,12 +13,11 @@ exports.upload = (req, res) => {
 
   File.saveFile(pdfFile, id, (error, data) => {
     if (error) {
-      res.send(error);
+      return res.status(500).send(error); // Cambiado res.send(error) a res.status(500).send(error)
     }
     res.send(data);
   });
-
-}
+};
 
 
 exports.getAllFiles = (req, res) => {
