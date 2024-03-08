@@ -1,6 +1,13 @@
+// module.exports = {
+//   HOST: 'localhost',
+//   USER: 'root',
+//   PASSWORD: '',
+//   DB: 'bd_progreso'
+// }
 module.exports = {
-  HOST: 'localhost',
+  HOST: 'viaduct.proxy.rlwy.net',
   USER: 'root',
-  PASSWORD: '',
+  PASSWORD: 'mgQmhBlimZQrBAELOybCZgSKKZAxVIqu',
+  PORT: '10213',
   DB: 'bd_progreso'
 }
