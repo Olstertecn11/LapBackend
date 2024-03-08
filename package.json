@@ -2,10 +2,13 @@
   "name": "lapbackend",
   "version": "1.0.0",
   "description": "",
-  "proxy": "http://127.0.0.1:3000",
-  "main": "./src/index.js",
+  "main": "./index.js",
+  "engines":{
+    "node": "19.x"
+  },
   "scripts": {
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
