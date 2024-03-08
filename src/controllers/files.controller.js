@@ -13,7 +13,7 @@ exports.upload = (req, res) => {
 
   File.saveFile(pdfFile, id, (error, data) => {
     if (error) {
-      return res.status(500).send(error); // Cambiado res.send(error) a res.status(500).send(error)
+      return res.send(error); // Cambiado res.send(error) a res.status(500).send(error)
     }
     res.send(data);
   });
