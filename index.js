@@ -22,7 +22,8 @@ app.use('/class', require('./src/routes/classes/index.js'))
 app.use('/', require('./src/routes/files/index.js'))
 
 
-app.use(cors({ origin: 'http://localhost:5173' }))
+app.use(cors())
+// app.use(cors({ origin: 'http://localhost:5173' }))
 app.get('', (req, res) => {
   res.send({ message: 'Testing working' });
 })
