@@ -37,5 +37,15 @@ File.getFiles = (result) => {
 }
 
 
+File.deleteFile = (id, result) => {
+  const query = 'delete  FROM archivos_pdf where id=?';
+
+  sql.query(query, id, (error, results, fields) => {
+    if (error) {
+      result(error, null);
+    }
+    result(null, results);
+  });
+}
 
 module.exports = File;

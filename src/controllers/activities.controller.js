@@ -53,7 +53,21 @@ exports.saveActivity = (req, res) => {
       return res.send({ status: true })
     }
   });
-
-
 }
+
+exports.deleteActivityById = (req, res) => {
+  const { id } = req.query;
+  if (!id) {
+    res.send('Missing id');
+    return;
+  }
+  Activity.deleteActivity(id, (err, data) => {
+    if (err) {
+      return res.send({ code: 0, msg: err })
+    }
+    res.send({ code: 1, msg: data })
+  });
+}
+
+
 

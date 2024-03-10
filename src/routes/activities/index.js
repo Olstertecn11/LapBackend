@@ -5,6 +5,7 @@ const Activity = require('../../controllers/activities.controller.js');
 
 router.get('/', Activity.getAllActivities);
 router.post('/', Activity.saveActivity);
+router.delete('/', Activity.deleteActivityById);
 router.get('/images', Activity.getImagesFromActivity);
 router.post('/images', Activity.saveImageFromActivity);
 

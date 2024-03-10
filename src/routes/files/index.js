@@ -7,6 +7,7 @@ const os = require('os');
 const upload = multer({ dest: os.tmpdir() });
 router.post('/upload', upload.single('pdfFile'), File.upload);
 router.get('/pdfs', File.getAllFiles);
+router.delete('/pdfs', File.deleteFileById);
 
 
 module.exports = router;

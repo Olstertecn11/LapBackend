@@ -21,8 +21,24 @@ exports.upload = (req, res) => {
 
 
 exports.getAllFiles = (req, res) => {
-
   File.getFiles((error, data) => {
     res.send(data);
   });
+}
+
+exports.deleteFileById = (req, res) => {
+  const { id } = req.query;
+  if (!id) {
+    res.send('missing id');
+  }
+  else {
+    File.deleteFile(id, (error, data) => {
+      if (error) {
+        return res.send({ code: 0, mscode: 1, msg: datag: error });
+      }
+      else {
+        res.send({ code: 1, msg: data });
+      }
+    });
+  }
 }

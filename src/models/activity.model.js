@@ -70,5 +70,36 @@ Activity.saveImage = (idActivity, img, result) => {
   });
 }
 
+
+
+Activity.deleteActivity = (id, result) => {
+  var _queryDeleteImages = `DELETE FROM tbl_act_images WHERE img_id_act='${id}'`;
+  sql.query(_queryDeleteImages, (err, data) => {
+    if (err) {
+      result(err, null);
+    } else {
+      var _queryDeleteActivity = `DELETE FROM tbl_activities WHERE act_id='${id}'`;
+      sql.query(_queryDeleteActivity, (err, data) => {
+        if (err) {
+          result(err, null);
+        } else {
+          result(null, data);
+        }
+      });
+    }
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = Activity;
 
