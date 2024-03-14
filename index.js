@@ -20,6 +20,7 @@ app.use('/auth', require('./src/routes/auth/index.js'))
 app.use('/activities', require('./src/routes/activities/index.js'))
 app.use('/class', require('./src/routes/classes/index.js'))
 app.use('/user', require('./src/routes/user/index.js'))
+app.use('/subject', require('./src/routes/subject/index.js'))
 app.use('/', require('./src/routes/files/index.js'))
 
 
