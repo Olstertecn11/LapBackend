@@ -34,7 +34,7 @@ exports.deleteFileById = (req, res) => {
   else {
     File.deleteFile(id, (error, data) => {
       if (error) {
-        return res.send({ code: 0, mscode: 1, msg: datag: error });
+        return res.send({ code: 0, mscode: 1, msg: error });
       }
       else {
         res.send({ code: 1, msg: data });
