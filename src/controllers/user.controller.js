@@ -3,6 +3,64 @@ const Token = require('../models/token.model.js');
 const crypto = require('crypto');
 
 
+
+// CRUD Functions
+exports.newUser = (req, res) => {
+  console.log(req);
+  const { name, surname, username, password, email, phone, dpi, privileges } = req.body;
+  if (!name || !surname || !username || !password || !email || !phone || !dpi || !privileges) {
+    return res.send({ message: 'Missing Dependencies' });
+  }
+  User.create(name, surname, username, password, email, phone, dpi, privileges, (err, data) => {
+    if (err) {
+      return res.send({ status: false, message: 'Creado Correctamente' });
+    }
+    res.send({ status: true, message: data });
+  });
+}
+
+
+exports.deleteUser = (req, res) => {
+  const { id } = req.query;
+  if (!id) {
+    return res.send({ code: 0, message: 'Missing Id dependencie' });
+  }
+  User.delete(id, (error, data) => {
+    if (error) {
+      return res.send({ code: 0, message: error });
+    }
+    res.send({ code: 0, message: 'Elminado Correctamente' });
+  });
+}
+
+
+
+
+exports.getAll = (req, res) => {
+  User.getAllUsers((error, data) => {
+    if (error) {
+      return res.send({ status: false, message: error })
+    }
+    res.send({ status: true, data: data });
+  });
+}
+
+
+
+
+
+
+
+
+
+//Auth Functions
+
+
+
+
+
+
+
 exports.userExist = (req, res) => {
   const { username, password } = req.body;
   User.findByCredentials(username, password, (err, data) => {
