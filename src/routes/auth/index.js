@@ -9,5 +9,4 @@ router.post('/', User.userExist);
 router.delete('/', User.closeUserSession);
 
 
-
 module.exports = router;
