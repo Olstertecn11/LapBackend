@@ -14,6 +14,54 @@ const User = (user) => {
 }
 
 
+
+// ================================= CRUD Functions ================================= 
+User.create = (name, surname, username, password, email, phone, dpi, role, result) => {
+  var _query = `insert into tbl_user(usr_name, usr_surname,usr_username, usr_password, usr_email, usr_phone, usr_dpi, usr_privileges)values`;
+  _query += `('${name}', '${surname}','${username}', '${password}','${email}', '${phone}', '${dpi}', '${role}');`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    result(null, res[0]);
+  });
+}
+
+
+User.delete = (Id, result) => {
+  var _query = `delete from tbl_user where usr_id='${Id}'`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      result(err, null);
+      return;
+    }
+    result(null, res[0]);
+  });
+}
+
+
+
+User.getAllUsers = (result) => {
+  var _query = `select * from tbl_user`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      result(err, null);
+      return;
+    }
+    result(null, res);
+  });
+}
+
+
+
+
+
+
+// ================================= Auth Functions ================================= 
+
+
 User.findByCredentials = (username, password, result) => {
   // var _query = ̣`select * from tbl_user where usr_username=${username} and usr_password=${password}`;
   var _query = `call VerificarUsuarioContrasena('${username}','${password}')`;
