@@ -9,6 +9,17 @@ const Class = (_class) => {
   this.teacher = _class.teacher
 }
 
+Class.createClass = (degree, subject, teacher, result) => {
+  var _query = `insert into tbl_class(cls_degree, cls_teacher, cls_subject)values('${degree}', '${teacher}', '${subject}')`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+    }
+    result(null, res);
+  });
+}
+
 Class.getClassesByTeacher = (id, result) => {
   var _query = `call GetClassDetailsByTeacher(${id})`;
   sql.query(_query, (err, res) => {

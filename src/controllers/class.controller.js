@@ -2,6 +2,18 @@
 const Class = require('../models/class.model.js');
 
 
+exports.create = (req, res) => {
+  const { degree, subject, teacher } = req.body;
+  if (!degree || !subject || !teacher) {
+    return res.send({ msg: 'missing dependencies' })
+  }
+  Class.createClass(degree, subject, teacher, (err, data) => {
+    if (err) {
+      return res.send({ status: false, msg: err })
+    }
+    res.send({ status: true, msg: 'Created' })
+  });
+}
 
 
 exports.getClasses = (req, res) => {
