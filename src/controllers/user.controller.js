@@ -1,17 +1,17 @@
 const User = require('../models/user.model.js');
 const Token = require('../models/token.model.js');
 const crypto = require('crypto');
-
+const { generateFromEmail, generateUsername } = require("unique-username-generator");
 
 
 // CRUD Functions
 exports.newUser = (req, res) => {
-  console.log(req);
-  const { name, surname, username, password, email, phone, dpi, privileges } = req.body;
-  if (!name || !surname || !username || !password || !email || !phone || !dpi || !privileges) {
+  const { password, email, privileges } = req.body;
+  if (!password || !email || !privileges) {
     return res.send({ message: 'Missing Dependencies' });
   }
-  User.create(name, surname, username, password, email, phone, dpi, privileges, (err, data) => {
+  const username = generateFromEmail(email, 3);
+  User.create('', '', username, password, email, '', '', privileges, (err, data) => {
     if (err) {
       return res.send({ status: false, message: 'Creado Correctamente' });
     }
@@ -30,6 +30,21 @@ exports.deleteUser = (req, res) => {
       return res.send({ code: 0, message: error });
     }
     res.send({ code: 0, message: 'Elminado Correctamente' });
+  });
+}
+
+
+exports.updateUserProfile = (req, res) => {
+  const { name, surname, phone, dpi, idUser } = req.body;
+  if (!name || !surname || !phone || !dpi || !idUser) {
+    return res.send({ message: 'Missing Dependencies' });
+  }
+  User.updateProfile(name, surname, phone, dpi, id, (error, data) => {
+    if (error) {
+      return res.send({ code: 0, message: 'Error actualizando al usuario' + error });
+    }
+    res.send({ code: 1, message: 'Actualizado correctamente' })
+
   });
 }
 
@@ -119,5 +134,22 @@ exports.hasSession = (req, res) => {
     }
   });
 }
+
+
+exports.hasActiveSession = (req, res) => {
+  const { idUser } = req.query;
+  Token.getTokenByUser(idUser, (err, data) => {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      return res.send(data === 0 ? { exist: false } : { exist: true });
+    }
+  });
+}
+
+
+
+
 
 

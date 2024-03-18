@@ -30,6 +30,19 @@ User.create = (name, surname, username, password, email, phone, dpi, role, resul
 }
 
 
+User.updateProfile = (name, surname, phone, dpi, id, result) => {
+  var _query = `update tbl_user set usr_name='${name}', usr_surname='${surname}', usr_phone='${phone}', usr_dpi='${dpi}' where usr_id='${id}'`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    result(null, res[0]);
+  });
+}
+
+
 User.delete = (Id, result) => {
   var _query = `delete from tbl_user where usr_id='${Id}'`;
   sql.query(_query, (err, res) => {

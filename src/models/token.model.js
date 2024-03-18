@@ -17,6 +17,10 @@ Token.createToken = (token_val, id_usr) => {
   })
 }
 
+
+
+
+
 Token.deleteToken = (id_usr, result) => {
   var _query = `delete from tbl_session_token where stk_id_user='${id_usr}'`;
   sql.query(_query, (err, res) => {
@@ -42,6 +46,20 @@ Token.getTokenBySession = (idUser, token, result) => {
     }
   })
 }
+
+Token.getTokenByUser = (idUser, result) => {
+  var _query = `select COUNT(*) AS rowCount from tbl_session_token where stk_id_user='${idUser}'`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      result(err, null);
+    }
+    else {
+      result(null, res[0].rowCount);
+    }
+  })
+}
+
+
 
 module.exports = Token;
 
