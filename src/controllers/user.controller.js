@@ -20,6 +20,8 @@ exports.newUser = (req, res) => {
 }
 
 
+
+
 exports.deleteUser = (req, res) => {
   const { id } = req.query;
   if (!id) {
@@ -35,11 +37,12 @@ exports.deleteUser = (req, res) => {
 
 
 exports.updateUserProfile = (req, res) => {
-  const { name, surname, phone, dpi, idUser } = req.body;
-  if (!name || !surname || !phone || !dpi || !idUser) {
+  console.log(req);
+  const { name, surname, phone, dpi, id, img } = req.body;
+  if (name == undefined || surname == undefined || phone == undefined || dpi == undefined || id == undefined || img == undefined) {
     return res.send({ message: 'Missing Dependencies' });
   }
-  User.updateProfile(name, surname, phone, dpi, id, (error, data) => {
+  User.updateProfile(name, surname, phone, dpi, id, img, (error, data) => {
     if (error) {
       return res.send({ code: 0, message: 'Error actualizando al usuario' + error });
     }
@@ -148,6 +151,15 @@ exports.hasActiveSession = (req, res) => {
   });
 }
 
+exports.getUserAttributes = (req, res) => {
+  const { idUser } = req.query;
+  User.getUserById(idUser, (error, data) => {
+    if (error) {
+      return res.send({ code: 0, message: error });
+    }
+    res.send({ code: 1, data })
+  });
+}
 
 
 

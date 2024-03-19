@@ -16,6 +16,22 @@ const User = (user) => {
 
 
 // ================================= CRUD Functions ================================= 
+
+
+User.getUserById = (idUser, result) => {
+  var _query = `select * from tbl_user where usr_id='${idUser}'`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    result(null, res[0]);
+  });
+}
+
+
+
 User.create = (name, surname, username, password, email, phone, dpi, role, result) => {
   var _query = `insert into tbl_user(usr_name, usr_surname,usr_username, usr_password, usr_email, usr_phone, usr_dpi, usr_privileges)values`;
   _query += `('${name}', '${surname}','${username}', '${password}','${email}', '${phone}', '${dpi}', '${role}');`;
@@ -30,8 +46,8 @@ User.create = (name, surname, username, password, email, phone, dpi, role, resul
 }
 
 
-User.updateProfile = (name, surname, phone, dpi, id, result) => {
-  var _query = `update tbl_user set usr_name='${name}', usr_surname='${surname}', usr_phone='${phone}', usr_dpi='${dpi}' where usr_id='${id}'`;
+User.updateProfile = (name, surname, phone, dpi, id, img, result) => {
+  var _query = `update tbl_user set usr_name='${name}', usr_surname='${surname}', usr_phone='${phone}', usr_dpi='${dpi}', usr_image='${img}' where usr_id='${id}'`;
   sql.query(_query, (err, res) => {
     if (err) {
       console.log("error: ", err);
