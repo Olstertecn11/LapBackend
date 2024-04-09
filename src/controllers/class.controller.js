@@ -45,3 +45,26 @@ exports.getClassesByTeacher = (req, res) => {
     }
   });
 }
+
+
+exports.deleteClassById = (req, res) => {
+  const { id } = req.query;
+  if (!id) {
+    res.send({ msg: 'missing dependencies' })
+  }
+  Class.deleteClass(id, (err, data) => {
+    if (err) {
+      res.send({ status: false, msg: err })
+    }
+    else {
+      res.send({ status: true })
+    }
+  });
+}
+
+
+
+
+
+
+

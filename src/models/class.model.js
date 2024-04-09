@@ -20,6 +20,19 @@ Class.createClass = (degree, subject, teacher, result) => {
   });
 }
 
+Class.deleteClass = (Id, result) => {
+  var _query = `delete from tbl_class where cls_id=${Id}`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+    }
+    result(null, res);
+  });
+}
+
+
+
 Class.getClassesByTeacher = (id, result) => {
   var _query = `call GetClassDetailsByTeacher(${id})`;
   sql.query(_query, (err, res) => {
