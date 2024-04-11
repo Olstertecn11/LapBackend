@@ -31,7 +31,7 @@ exports.deleteUser = (req, res) => {
     if (error) {
       return res.send({ code: 0, message: error });
     }
-    res.send({ code: 0, message: 'Elminado Correctamente' });
+    res.send({ code: 1, message: 'Elminado Correctamente' });
   });
 }
 
