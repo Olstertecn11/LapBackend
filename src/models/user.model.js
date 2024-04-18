@@ -73,7 +73,7 @@ User.delete = (Id, result) => {
 
 
 User.getAllUsers = (result) => {
-  var _query = `SELECT usr_id, usr_name, usr_username, usr_email, usr_password, usr_dpi, usr_phone FROM sql5697981.tbl_user`;
+  var _query = `SELECT usr_id, usr_name, usr_username, usr_email, usr_password, usr_dpi, usr_phone FROM tbl_user`;
   sql.query(_query, (err, res) => {
     if (err) {
       result(err, null);
