@@ -6,7 +6,8 @@ var connection = mysql.createPool({
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
   database: dbConfig.DB,
-  port: dbConfig.PORT
+  port: dbConfig.PORT,
+  charset: 'utf8mb4'
 });
 
 module.exports = connection;

@@ -1,7 +1,7 @@
 module.exports = {
   HOST: 'localhost',
   USER: 'root',
-  PASSWORD: '',
+  PASSWORD: '1234',
   DB: 'bd_progreso'
 }
 // module.exports = {
