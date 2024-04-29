@@ -3,6 +3,7 @@ var router = express.Router()
 const User = require('../../models/user.model');
 const Token = require('../../models/token.model');
 const { generateFromEmail, generateUsername } = require("unique-username-generator");
+import EmailHelper from '../../helpers/EmailHelper';
 
 router.post('/', (req, res) => {
   const { email, password, accessCode } = req.body;
@@ -13,6 +14,7 @@ router.post('/', (req, res) => {
     }
     User.create('', '', username, password, email, '', '', 2, (err, data) => {
       if (err) {
+        EmailHelper.registerUser(email, username);
         return res.send({ status: false, message: 'Creado Correctamente' });
       }
       return res.send({ status: true, message: data });
