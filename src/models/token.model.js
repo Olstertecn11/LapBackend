@@ -59,7 +59,17 @@ Token.getTokenByUser = (idUser, result) => {
   })
 }
 
-
+Token.FindAccessCode = (code, result) => {
+  var _query = `select * from tbl_codigo_acceso where codigo='${code}'`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      result(err, null);
+    }
+    else {
+      result(null, res[0].rowCount);
+    }
+  })
+}
 
 module.exports = Token;
 
