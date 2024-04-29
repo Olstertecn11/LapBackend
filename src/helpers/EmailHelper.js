@@ -1,4 +1,4 @@
-import emailjs from '@emailjs/browser';
+const emailjs = require('@emailjs/browser');
 
 
 const credentials = {
@@ -14,4 +14,5 @@ const EmailHelper = {
   }
 }
 
-export default EmailHelper;
+
+module.exports = EmailHelper;
