@@ -2,6 +2,7 @@ const User = require('../models/user.model.js');
 const Token = require('../models/token.model.js');
 const crypto = require('crypto');
 const { generateFromEmail, generateUsername } = require("unique-username-generator");
+const EmailHelper = require('../helpers/EmailHelper');
 
 
 // CRUD Functions
@@ -15,7 +16,7 @@ exports.newUser = (req, res) => {
     if (err) {
       return res.send({ status: false, message: 'Creado Correctamente' });
     }
-    res.send({ status: true, message: data });
+    res.send({ status: true, message: data, newUser: { username, password, email } });
   });
 }
 
