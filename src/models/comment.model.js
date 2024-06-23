@@ -1,16 +1,13 @@
 
 const sql = require('./db.js');
 
-
 const Comment = (_class) => {
-  this.id = _class.id
-  this.degree = _class.degree
-  this.subject = _class.subject
-  this.teacher = _class.teacher
 }
 
-Class.createClass = (degree, subject, teacher, result) => {
-  var _query = `insert into tbl_class(cls_degree, cls_teacher, cls_subject)values('${degree}', '${teacher}', '${subject}')`;
+
+
+Comment.create = (content, file, user, _class, result) => {
+  var _query = `insert into tbl_comments(content, id_archivo, id_usuario, id_class, fecha)values('${content}', '${file}', '${user}', '${_class}', CURDATE())`;
   sql.query(_query, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -20,68 +17,20 @@ Class.createClass = (degree, subject, teacher, result) => {
   });
 }
 
-Comment.create = (content, file, user) => {
-  var _query = `insert into tbl_`;
-  sql.query(_query, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
+Comment.getByClassAndPdf = (idClass, idPdf, result) => {
+  const selectQuery = `
+  select tbl_user.usr_name, tbl_comments.content from sql5697981.tbl_comments inner join tbl_user on tbl_comments.id_usuario = tbl_user.usr_id
+  inner join tbl_class on tbl_comments.id_class = tbl_class.cls_id inner join archivos_pdf
+    on tbl_comments.id_archivo = archivos_pdf.id where tbl_comments.id_class = ${idClass} and archivos_pdf.id = ${idPdf};
+ `
+  sql.query(selectQuery, (error, results, fields) => {
+    if (error) {
+      result(error, null);
     }
-    result(null, res);
+    result(null, results);
   });
 }
 
 
 
-Class.deleteClass = (Id, result) => {
-  var _query = `delete from tbl_class where cls_id=${Id}`;
-  sql.query(_query, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-    }
-    result(null, res);
-  });
-}
-
-
-
-Class.getClassesByTeacher = (id, result) => {
-  var _query = `call GetClassDetailsByTeacher(${id})`;
-  sql.query(_query, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
-
-    if (res.length) {
-      console.log("found tutorial: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
-    result({ kind: "not_found" }, null);
-  });
-}
-
-
-Class.getAllClasses = (result) => {
-  var _query = `call GetClassDetails()`;
-  sql.query(_query, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
-
-    if (res.length) {
-      console.log("found tutorial: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
-    result({ kind: "not_found" }, null);
-  });
-}
-
-
-module.exports = Class;
+module.exports = Comment;
