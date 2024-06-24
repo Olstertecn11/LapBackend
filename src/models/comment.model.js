@@ -19,7 +19,7 @@ Comment.create = (content, file, user, _class, result) => {
 
 Comment.getByClassAndPdf = (idClass, idPdf, result) => {
   const selectQuery = `
-  select tbl_user.usr_name, tbl_comments.content from sql5697981.tbl_comments inner join tbl_user on tbl_comments.id_usuario = tbl_user.usr_id
+  select tbl_user.usr_name, tbl_comments.content, tbl_comments.fecha from tbl_comments inner join tbl_user on tbl_comments.id_usuario = tbl_user.usr_id
   inner join tbl_class on tbl_comments.id_class = tbl_class.cls_id inner join archivos_pdf
     on tbl_comments.id_archivo = archivos_pdf.id where tbl_comments.id_class = ${idClass} and archivos_pdf.id = ${idPdf};
  `
