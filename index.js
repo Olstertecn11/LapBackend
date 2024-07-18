@@ -24,6 +24,7 @@ app.use('/subject', require('./src/routes/subject/index.js'))
 app.use('/degree', require('./src/routes/degree/index.js'))
 app.use('/register', require('./src/routes/register/index.js'))
 app.use('/comments', require('./src/routes/comments/index.js'))
+app.use('/student', require('./src/routes/student/index.js'))
 app.use('/', require('./src/routes/files/index.js'))
 
 
