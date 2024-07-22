@@ -71,4 +71,18 @@ Class.getAllClasses = (result) => {
 }
 
 
+
+
+Class.getClassById = (id, result) => {
+  var _query = `call getClassById(${id})`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      result(err, { code: 400, msg: err, data: [] });
+      return;
+    }
+    result(null, { code: 200, msg: 'Obteniendo clases por id', data: res[0] });
+  });
+}
+
+
 module.exports = Class;

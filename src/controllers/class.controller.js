@@ -62,6 +62,16 @@ exports.deleteClassById = (req, res) => {
   });
 }
 
+exports.getClassById = (req, res) => {
+  const { id } = req.query;
+  if (!id) {
+    return res.send({ response: { code: 400, msg: 'Missing id dependencie', data: [] } });
+  }
+
+  Class.getClassById(id, (err, data) => {
+    return res.send(data);
+  });
+}
 
 
 

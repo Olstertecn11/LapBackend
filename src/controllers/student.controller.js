@@ -6,6 +6,14 @@ exports.getAll = (req, res) => {
   });
 }
 
+exports.getByClass = (req, res) => {
+  const { id_class } = req.query;
+  console.log(id_class);
+  Student.getByClass(id_class, (err, data) => {
+    return res.send({ response: data });
+  });
+}
+
 exports.save = (req, res) => {
   const { name, surname, id_class } = req.body;
   if (!name || !surname || !id_class) return res.send({ msg: 'Error' });
