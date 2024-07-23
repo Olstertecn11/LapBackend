@@ -21,7 +21,7 @@ Class.createClass = (degree, subject, teacher, result) => {
 }
 
 Class.deleteClass = (Id, result) => {
-  var _query = `delete from tbl_class where cls_id=${Id}`;
+  var _query = `call deleteClass(${Id})`;
   sql.query(_query, (err, res) => {
     if (err) {
       console.log("error: ", err);
