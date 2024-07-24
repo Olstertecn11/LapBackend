@@ -7,17 +7,22 @@ const EmailHelper = require('../../helpers/EmailHelper');
 
 router.post('/', (req, res) => {
   const { email, password, accessCode } = req.body;
+  if (!email || !password || !accessCode) {
+    return res.send({ status: false, message: 'Missing dependencies' });
+  }
   const username = generateFromEmail(email, 10);
   Token.FindAccessCode(accessCode, (err, data) => {
     if (err) {
+      console.log(err);
       return res.send({ status: true, message: data });
     }
     User.create('', '', username, password, email, '', '', 2, (err, data) => {
       if (err) {
+        console.log(err);
         EmailHelper.registerUser(email, username);
         return res.send({ status: false, message: 'Creado Correctamente' });
       }
-      return res.send({ status: true, message: data });
+      res.send({ status: true, data: { username, password, email } });
     });
   });
 

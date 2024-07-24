@@ -14,7 +14,8 @@ exports.newUser = (req, res) => {
   const username = generateFromEmail(email, 3);
   User.create('', '', username, password, email, '', '', privileges, (err, data) => {
     if (err) {
-      return res.send({ status: false, message: 'Creado Correctamente' });
+      console.log(err);
+      return res.send({ status: false, message: 'Error al crear el usuario', err });
     }
     res.send({ status: true, message: data, newUser: { username, password, email } });
   });
