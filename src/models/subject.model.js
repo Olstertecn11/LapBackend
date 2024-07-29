@@ -30,7 +30,7 @@ Subject.getAll = (result) => {
 }
 
 Subject.delete = (Id, result) => {
-  var _query = `delete from tbl_subject where sbj_id='${Id}'`;
+  var _query = `call deleteSubject(${Id})`;
   sql.query(_query, (err, res) => {
     if (err) {
       console.log("error: ", err);

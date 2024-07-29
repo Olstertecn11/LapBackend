@@ -60,9 +60,10 @@ User.updateProfile = (name, surname, phone, dpi, id, img, result) => {
 
 
 User.delete = (Id, result) => {
-  var _query = `delete from tbl_user where usr_id='${Id}'`;
+  var _query = `call deleteUser(${Id})`;
   sql.query(_query, (err, res) => {
     if (err) {
+      console.log(err);
       result(err, null);
       return;
     }
@@ -71,9 +72,20 @@ User.delete = (Id, result) => {
 }
 
 
+User.getAllUsersVW = (result) => {
+  var _query = `select * from vw_user`;
+  sql.query(_query, (err, res) => {
+    if (err) {
+      result(err, null);
+      return;
+    }
+    result(null, res);
+  });
+
+}
 
 User.getAllUsers = (result) => {
-  var _query = `SELECT usr_id, usr_name, usr_username, usr_email, usr_password, usr_dpi, usr_phone FROM tbl_user`;
+  var _query = "SELECT usr_id, usr_name, usr_username, usr_email, REPEAT('*', 5) AS usr_password, usr_dpi, usr_phone FROM tbl_user";
   sql.query(_query, (err, res) => {
     if (err) {
       result(err, null);
@@ -92,8 +104,8 @@ User.getAllUsers = (result) => {
 
 
 User.findByCredentials = (username, password, result) => {
-  // var _query = ̣`select * from tbl_user where usr_username=${username} and usr_password=${password}`;
-  var _query = `call VerificarUsuarioContrasena('${username}','${password}')`;
+  // var _query = ̣`select * from tbl_user where usr_username = ${ username } and usr_password = ${ password } `;
+  var _query = `call VerificarUsuarioContrasena('${username}', '${password}')`;
   sql.query(_query, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -112,7 +124,7 @@ User.findByCredentials = (username, password, result) => {
 
 
 User.getUserByCredentials = (username, password, result) => {
-  var _query = `SELECT tbl_user.usr_image, tbl_user.usr_name, tbl_user.usr_id, tbl_privileges.priv_id FROM tbl_user INNER JOIN tbl_privileges ON tbl_user.usr_privileges = tbl_privileges.priv_id where tbl_user.usr_username='${username}' and tbl_user.usr_password='${password}'`;
+  var _query = `SELECT tbl_user.usr_image, tbl_user.usr_name, tbl_user.usr_id, tbl_privileges.priv_id FROM tbl_user INNER JOIN tbl_privileges ON tbl_user.usr_privileges = tbl_privileges.priv_id where tbl_user.usr_username = '${username}' and tbl_user.usr_password = '${password}'`;
   sql.query(_query, (err, res) => {
     if (err) {
       console.log("error: ", err);

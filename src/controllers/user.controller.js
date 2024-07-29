@@ -31,6 +31,7 @@ exports.deleteUser = (req, res) => {
   }
   User.delete(id, (error, data) => {
     if (error) {
+      console.log(error);
       return res.send({ code: 0, message: error });
     }
     res.send({ code: 1, message: 'Elminado Correctamente' });
@@ -65,7 +66,14 @@ exports.getAll = (req, res) => {
   });
 }
 
-
+exports.getAllVW = (req, res) => {
+  User.getAllUsersVW((error, data) => {
+    if (error) {
+      return res.send({ status: false, message: error })
+    }
+    res.send({ status: true, data: data });
+  });
+}
 
 
 

@@ -21,9 +21,12 @@ exports.delete = (req, res) => {
   }
   Degree.delete(id, (error, data) => {
     if (error) {
+      console.log(error);
       return res.send({ code: 0, message: error });
     }
-    res.send({ code: 0, message: 'Elminado Correctamente' });
+    console.log(error);
+    console.log(data);
+    res.send({ code: 1, message: 'Elminado Correctamente' });
   });
 }
 

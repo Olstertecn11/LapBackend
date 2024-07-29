@@ -7,6 +7,7 @@ const User = require('../../controllers/user.controller.js');
 // user managment functions
 router.post('/', User.newUser);
 router.get('/', User.getAll);
+router.get('/vw', User.getAllVW);
 router.delete('/', User.deleteUser);
 
 

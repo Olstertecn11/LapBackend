@@ -29,13 +29,15 @@ Degree.getAll = (result) => {
 }
 
 Degree.delete = (Id, result) => {
-  var _query = `delete from tbl_degree where deg_id='${Id}'`;
+  var _query = `call deleteDegree(${Id})`;
   sql.query(_query, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
+    console.log(err);
+    console.log(res);
     result(null, res);
   });
 }
