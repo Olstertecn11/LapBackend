@@ -25,6 +25,24 @@ File.saveFile = (pdfFile, id, result) => {
 }
 
 
+File.updateFile = (pdfFile, id, result) => {
+  const updateQuery = 'UPDATE archivos_pdf SET contenido = ? WHERE id = ?';
+
+  const fs = require('fs');
+  const content = fs.readFileSync(pdfFile.path);
+
+  const values = [content, id];
+
+  sql.query(updateQuery, values, (error, results, fields) => {
+    if (error) {
+      result(error, null);
+    } else {
+      result(null, results);
+    }
+  });
+}
+
+
 File.getFiles = (result) => {
   const selectQuery = 'SELECT * FROM archivos_pdf';
 

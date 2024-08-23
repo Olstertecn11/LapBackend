@@ -19,6 +19,23 @@ exports.upload = (req, res) => {
   });
 };
 
+exports.update = (req, res) => {
+  const pdfFile = req.file;
+  const { id } = req.query;
+
+  if (!pdfFile) {
+    return res.status(400).send('No se ha enviado ningún archivo.');
+  }
+
+  File.updateFile(pdfFile, id, (error, data) => {
+    if (error) {
+      return res.send(error);
+    }
+    res.send(data);
+  });
+};
+
+
 
 exports.getAllFiles = (req, res) => {
   File.getFiles((error, data) => {
